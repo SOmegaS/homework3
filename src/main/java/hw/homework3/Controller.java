@@ -1,6 +1,5 @@
 package hw.homework3;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import hw.homework3.request.RequestV1;
 import hw.homework3.request.RequestV4;
 import hw.homework3.request.RequestV5;
@@ -64,7 +63,7 @@ public class Controller {
     }
 
     @GetMapping("/api/v3/get-like")
-    public ResponseV3 getLikeV3(@Nullable @RequestBody RequestV1 request) throws JsonProcessingException {
+    public ResponseV3 getLikeV3(@Nullable @RequestBody RequestV1 request) {
         if (request == null) {
             request = new RequestV1();
         }
@@ -84,7 +83,7 @@ public class Controller {
     }
 
     @GetMapping("/api/v4/get-like")
-    public ResponseV3 getLikeV4(@Nullable @RequestBody RequestV4 request) throws JsonProcessingException {
+    public ResponseV3 getLikeV4(@Nullable @RequestBody RequestV4 request) {
         if (request == null) {
             request = new RequestV4();
         }
@@ -106,7 +105,7 @@ public class Controller {
     }
 
     @GetMapping("api/v5/get-like")
-    public ResponseV3 getLikeV5(@Nullable @RequestBody RequestV5 request) throws JsonProcessingException {
+    public ResponseV3 getLikeV5(@Nullable @RequestBody RequestV5 request) {
         if (request == null) {
             request = new RequestV5();
         }
