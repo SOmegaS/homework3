@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestV4 {
+    @Nullable
     private String likePattern;
 
     @Nullable

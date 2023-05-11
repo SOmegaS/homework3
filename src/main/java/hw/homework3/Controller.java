@@ -6,7 +6,6 @@ import hw.homework3.request.RequestV5;
 import hw.homework3.response.ResponseV1;
 import hw.homework3.response.ResponseV2;
 import hw.homework3.response.ResponseV3;
-import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,14 +25,8 @@ public class Controller {
     }
 
     @GetMapping("/api/v1/get-like")
-    public ResponseV1 getLikeV1(@Nullable @RequestBody RequestV1 request) {
-        if (request == null) {
-            request = new RequestV1();
-        }
-        if (request.getLikePattern() == null) {
-            request.setLikePattern("%");
-        }
-        String regexPattern = likeToRegex(request.getLikePattern());
+    public ResponseV1 getLikeV1(@RequestBody RequestV1 request) {
+        String regexPattern = request.getLikePattern() == null ? ".*" : likeToRegex(request.getLikePattern());
         ResponseV1 response = new ResponseV1();
         for (User user : userRepository.users) {
             if (user.login().matches(regexPattern)) {
@@ -44,14 +37,8 @@ public class Controller {
     }
 
     @GetMapping("/api/v2/get-like")
-    public ResponseV2 getLikeV2(@Nullable @RequestBody RequestV1 request) {
-        if (request == null) {
-            request = new RequestV1();
-        }
-        if (request.getLikePattern() == null) {
-            request.setLikePattern("%");
-        }
-        String regexPattern = likeToRegex(request.getLikePattern());
+    public ResponseV2 getLikeV2(@RequestBody RequestV1 request) {
+        String regexPattern = request.getLikePattern() == null ? ".*" : likeToRegex(request.getLikePattern());
         ResponseV2 response = new ResponseV2();
         response.setUserCount(userRepository.users.size());
         for (User user : userRepository.users) {
@@ -63,14 +50,8 @@ public class Controller {
     }
 
     @GetMapping("/api/v3/get-like")
-    public ResponseV3 getLikeV3(@Nullable @RequestBody RequestV1 request) {
-        if (request == null) {
-            request = new RequestV1();
-        }
-        if (request.getLikePattern() == null) {
-            request.setLikePattern("%");
-        }
-        String regexPattern = likeToRegex(request.getLikePattern());
+    public ResponseV3 getLikeV3(@RequestBody RequestV1 request) {
+        String regexPattern = request.getLikePattern() == null ? ".*" : likeToRegex(request.getLikePattern());
         ResponseV3 response = new ResponseV3();
         response.setUserCount(userRepository.users.size());
         for (User user : userRepository.users) {
@@ -83,15 +64,9 @@ public class Controller {
     }
 
     @GetMapping("/api/v4/get-like")
-    public ResponseV3 getLikeV4(@Nullable @RequestBody RequestV4 request) {
-        if (request == null) {
-            request = new RequestV4();
-        }
-        if (request.getLikePattern() == null) {
-            request.setLikePattern("%");
-        }
+    public ResponseV3 getLikeV4(@RequestBody RequestV4 request) {
         if (request.getRegexPattern() == null) {
-            request.setRegexPattern(likeToRegex(request.getLikePattern()));
+            request.setRegexPattern(request.getLikePattern() == null ? ".*" : likeToRegex(request.getLikePattern()));
         }
         ResponseV3 response = new ResponseV3();
         response.setUserCount(userRepository.users.size());
@@ -105,15 +80,9 @@ public class Controller {
     }
 
     @GetMapping("api/v5/get-like")
-    public ResponseV3 getLikeV5(@Nullable @RequestBody RequestV5 request) {
-        if (request == null) {
-            request = new RequestV5();
-        }
-        if (request.getLikePattern() == null) {
-            request.setLikePattern("%");
-        }
+    public ResponseV3 getLikeV5(@RequestBody RequestV5 request) {
         if (request.getRegexPattern() == null) {
-            request.setRegexPattern(likeToRegex(request.getLikePattern()));
+            request.setRegexPattern(request.getLikePattern() == null ? ".*" : likeToRegex(request.getLikePattern()));
         }
         ResponseV3 response = new ResponseV3();
         response.setUserCount(userRepository.users.size());
